@@ -1,47 +1,24 @@
-import React, { Component, Suspense } from 'react';
-import { useTranslation, withTranslation, Trans } from 'react-i18next';
-
-// use hoc for class based components
-class LegacyWelcomeClass extends Component {
-  render() {
-    const { t } = this.props;
-    return <h2>{t('title')}</h2>;
-  }
-}
-const Welcome = withTranslation()(LegacyWelcomeClass);
-
-// Component using the Trans component
-function MyComponent() {
-  return (
-    <Trans i18nKey="description.part1">
-      To get started, edit <code>src/App.js</code> and save to reload.
-    </Trans>
-  );
-}
+import React, { Suspense } from "react";
+import { useTranslation } from "react-i18next";
 
 // page uses the hook
-function Page() {
+const Page = () => {
   const { t, i18n } = useTranslation();
-
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
   };
 
   return (
-    <div className="App">
+    <div>
       <div className="App-header">
-        <Welcome />
-        <button type="button" onClick={() => changeLanguage('de')}>
+        <button type="button" onClick={() => changeLanguage("de")}>
           de
         </button>
-        <button type="button" onClick={() => changeLanguage('en')}>
+        <button type="button" onClick={() => changeLanguage("en")}>
           en
         </button>
       </div>
-      <div className="App-intro">
-        <MyComponent />
-      </div>
-      <div>{t('description.part2')}</div>
+      <div>{t("description.part2")}</div>
     </div>
   );
 }
